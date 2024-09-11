@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Patogeno</title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        function validarFormulario(event) {
+            const idPatogeno= document.getElementById('idPatogeno').value.trim();
+            const tipoPatogeno = document.getElementById('tipoPatogeno').value.trim();
+
+            if (!idPatogeno || !tipoPatogeno) {
+                event.preventDefault(); // Impede o envio do formulário
+                alert('Preencha todos os dados para cadastrar.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="voltar">← Voltar</a>
+        <h1>1° passo: Cadastrar Patógeno</h1>
+
+        <form action="/cadastrar-patogeno" method="POST" onsubmit="validarFormulario(event)">
+            <label for="idPatogeno">ID do Patógeno</label>
+            <input type="text" id="idPatogeno" name="idPatogeno">
+
+            <label for="tipoPatogeno">Tipo do Patógeno</label>
+            <input type="text" id="tipoPatogeno" name="tipoPatogeno">
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>

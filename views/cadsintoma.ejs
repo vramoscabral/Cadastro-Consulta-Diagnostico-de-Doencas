@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Sintoma</title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        const MAX_CAMPOS = 3;
+        
+        // Função para adicionar um novo campo de sintoma
+        function adicionarCampo() {
+            const container = document.getElementById('sintomas-container');
+            const campos = container.getElementsByClassName('sintoma');
+            
+            if (campos.length < MAX_CAMPOS) {
+                const div = document.createElement('div');
+                div.className = 'sintoma'; // Adiciona uma classe para facilitar a remoção
+
+                // Cria o campo de texto para o sintoma
+                const inputSintoma = document.createElement('input');
+                inputSintoma.type = 'text';
+                inputSintoma.name = 'nomeSintoma[]'; // Define o nome como um array
+                inputSintoma.placeholder = 'Nome Sintoma';
+
+                // Cria o campo de seleção para a incidência
+                const selectIncidencia = document.createElement('select');
+                selectIncidencia.name = 'incidencia[]'; // Define o nome como um array
+                const opcoes = ['Muito raro', 'Raro', 'Pouco comum', 'Comum', 'Muito comum'];
+                opcoes.forEach(opcao => {
+                    const option = document.createElement('option');
+                    option.value = opcao;
+                    option.textContent = opcao;
+                    selectIncidencia.appendChild(option);
+                });
+
+                // Adiciona os campos criados ao container
+                div.appendChild(inputSintoma);
+                div.appendChild(selectIncidencia);
+                container.appendChild(div);
+            } else {
+                alert(`Você pode adicionar no máximo ${MAX_CAMPOS} sintomas.`);
+            }
+        }
+
+        // Função para remover o último campo de sintoma
+        function removerUltimoCampo() {
+            const container = document.getElementById('sintomas-container');
+            const campos = container.getElementsByClassName('sintoma');
+            
+            if (campos.length > 1) { // Garantir que sempre há pelo menos um campo
+                container.removeChild(container.lastChild);
+            }
+        }
+
+        function validarFormulario(event) {
+        const nomeSintomas = document.getElementsByName('nomeSintoma[]');
+        let todosPreenchidos = true;
+
+        // Verifica se todos os campos visíveis foram preenchidos
+        for (let i = 0; i < nomeSintomas.length; i++) {
+            if (nomeSintomas[i].value.trim() === '') {
+                todosPreenchidos = false;
+                break;
+            }
+        }
+
+        // Se algum campo visível não foi preenchido, impede o envio do formulário
+        if (!todosPreenchidos) {
+            event.preventDefault();
+            alert('Por favor, preencha todos os campos de sintomas que foram adicionados.');
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <p>Não é permitido voltar desse ponto.</p>
+        <h1>3° passo: Cadastrar Sintoma(s)</h1>
+
+        <form action="/cadsintomas" method="POST" onsubmit="validarFormulario(event)">
+            <input type="hidden" id="pcid" name="pcid" value="<%= cid %>">
+            <input type="hidden" id="nometech" name="nometech" value="<%= nomeTecnico %>">
+
+            <p>Id da Doença cadastrada: <%= cid %></p>
+            <p>Nome da doença: <%= nomeTecnico %></p>
+
+            <div id="sintomas-container">
+                <div class="sintoma"> <!-- Container para o primeiro campo -->
+                    <label for="nomeSintoma">Nome Sintoma</label>
+                    <input type="text" id="nomeSintoma" name="nomeSintoma[]" placeholder="Nome Sintoma">
+                    <label for="incidencia">Incidência</label>
+                    <select id="incidencia" name="incidencia[]">
+                        <option value="Muito raro">Muito raro</option>
+                        <option value="Raro">Raro</option>
+                        <option value="Pouco comum">Pouco comum</option>
+                        <option value="Comum">Comum</option>
+                        <option value="Muito comum">Muito comum</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" onclick="adicionarCampo()">Adicionar mais um sintoma</button>
+            <button type="button" onclick="removerUltimoCampo()">Remover último sintoma</button>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>

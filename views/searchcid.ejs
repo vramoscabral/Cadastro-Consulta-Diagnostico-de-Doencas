@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PesquisaCID</title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        function validarFormulario(event) {
+            const cid = document.getElementById('cid').value.trim();
+
+            if (!cid) {
+                event.preventDefault(); // Impede o envio do formulário
+                alert('Preencha o valor para pesquisar.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <a href="/consultar" class="voltar">← Voltar</a>
+        <h1>Digite o CID</h1>
+
+        <form action="/pesquisacid" method="POST" onsubmit="validarFormulario(event)">
+            
+            <input type="text" id="cid" name="cid">
+
+            <button type="submit">Pesquisar</button>
+        </form>
+    </div>
+</body>
+</html>

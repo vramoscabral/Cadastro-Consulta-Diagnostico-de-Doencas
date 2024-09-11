@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostico</title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        const MAX_CAMPOS = 4;
+
+       function adicionarCampo() {
+            const container = document.getElementById('sintomas-container');
+            const campos = container.getElementsByTagName('input');
+            
+            if (campos.length < MAX_CAMPOS) {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = 'nomeSintoma[]'; // Define o nome como um array
+                input.placeholder = 'Nome Sintoma';
+                container.appendChild(input);
+            } else {
+                alert(`Você pode adicionar no máximo ${MAX_CAMPOS} sintomas.`);
+            }
+        }
+
+        function removerUltimoCampo() {
+            const container = document.getElementById('sintomas-container');
+            if (container.childElementCount > 1) {
+                container.removeChild(container.lastChild);
+            }
+        }
+
+        function validarFormulario(event) {
+        const sintomas = document.getElementsByName('nomeSintoma[]');
+        let todosPreenchidos = true;
+
+        // Verifica se todos os campos visíveis foram preenchidos
+        for (let i = 0; i < sintomas.length; i++) {
+            if (sintomas[i].value.trim() === '') {
+                todosPreenchidos = false;
+                break;
+            }
+        }
+
+        // Se algum campo visível não foi preenchido, impede o envio do formulário
+        if (!todosPreenchidos) {
+            event.preventDefault();
+            alert('Por favor, preencha todos os campos para pesquisar.');
+        }
+        };
+        
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Apoio ao Diagnóstico</h1>
+
+        <form action="/pesquisasintoma" method="POST" onsubmit="validarFormulario(event)">
+            <div id="sintomas-container">
+                <label for="nomeSint">Nome do Sintoma</label>
+                <input type="text" id="nomeSintoma" name="nomeSintoma[]" placeholder="Nome Sintoma">
+            </div>
+            <button type="button" onclick="adicionarCampo()">Adicionar mais um nome</button>
+            <button type="button" onclick="removerUltimoCampo()">Remover último nome</button>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>

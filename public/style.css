@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centraliza o conteúdo */
+}
+
+.container-table {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para a tabela */
+.container-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Estilo para as células de cabeçalho */
+.container-table th {
+    background-color: #f2f2f2;
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Estilo para as células de dados */
+.container-table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Estilo para as linhas alternadas */
+.container-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Estilo para as linhas ao passar o mouse */
+.container-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsividade 
+@media (max-width: 768px) {
+    .container-table table {
+        font-size: 12px;
+    }
+
+    .container-table th, .container-table td {
+        padding: 8px 10px;
+    }
+}*/
+
+.pagination {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+}
+
+.pagination a.active {
+    background-color: #0056b3;
+    pointer-events: none;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os campos */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Espaçamento entre botões */
+    cursor: pointer;
+    width: 100%; /* Ajusta os botões para o mesmo tamanho */
+    max-width: 200px; /* Limita a largura máxima */
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+.voltar {
+    text-decoration: none;
+    font-size: 18px;
+    margin-bottom: 20px;
+    display: inline-block;
+    color: blue;
+}
+
+.voltar:hover {
+    text-decoration: underline;
+}
+
+label {
+    margin-bottom: 15px;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* Para que o campo de texto fique centralizado e no mesmo padrão */
+}

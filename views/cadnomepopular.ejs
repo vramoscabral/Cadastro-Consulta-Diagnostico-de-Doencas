@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Nome Popular</title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        const MAX_CAMPOS = 4;
+
+       function adicionarCampo() {
+            const container = document.getElementById('nomes-populares-container');
+            const campos = container.getElementsByTagName('input');
+            
+            if (campos.length < MAX_CAMPOS) {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = 'nomePopular[]'; // Define o nome como um array
+                input.placeholder = 'Nome Popular da Doença';
+                container.appendChild(input);
+            } else {
+                alert(`Você pode adicionar no máximo ${MAX_CAMPOS} nomes populares.`);
+            }
+        }
+
+        function removerUltimoCampo() {
+            const container = document.getElementById('nomes-populares-container');
+            if (container.childElementCount > 1) {
+                container.removeChild(container.lastChild);
+            }
+        }
+
+        function validarFormulario(event) {
+        const nomePopulares = document.getElementsByName('nomePopular[]');
+        let todosPreenchidos = true;
+
+        // Verifica se todos os campos visíveis foram preenchidos
+        for (let i = 0; i < nomePopulares.length; i++) {
+            if (nomePopulares[i].value.trim() === '') {
+                todosPreenchidos = false;
+                break;
+            }
+        }
+
+        // Se algum campo visível não foi preenchido, impede o envio do formulário
+        if (!todosPreenchidos) {
+            event.preventDefault();
+            alert('Por favor, preencha todos os campos para cadastrar. Clique em voltar para não cadastrar nomes populares.');
+        }
+        };
+        
+        window.onload = function() {
+            const ppcid = "<%= pcid %>";
+            const nnometech = "<%= nometech %>";
+            
+            // Debug: Verificar se os valores estão corretos
+            console.log("PCID:", ppcid);
+            console.log("Nome Técnico:", nnometech);
+
+            if (ppcid && nnometech) {
+                // Construir a URL dinamicamente
+                const url = `/sucessofim?ppcid=${encodeURIComponent(ppcid)}&nnometech=${encodeURIComponent(nnometech)}`;
+                
+                // Debug: Verificar a URL gerada
+                console.log("URL gerada:", url);
+
+                // Atualizar o link
+                const voltarLink = document.getElementById('voltar-link');
+                voltarLink.href = url;
+            } else {
+                console.error("Valores não encontrados para PCID ou Nome Técnico.");
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <a id="voltar-link" class="voltar">← Voltar</a>
+        <h1>4° passo (opcional): Cadastrar Nome(s) Popular(es)</h1>
+
+        <form action="/cadnomepopulars" method="POST" onsubmit="validarFormulario(event)">
+            <input type="hidden" id="ppcid" name="ppcid" value="<%= pcid %>">
+            <input type="hidden" id="nnometech" name="nnometech" value="<%= nometech %>">
+
+            <p>Id da Doença cadastrada: <%= pcid %></p>
+            <p>Nome da doença: <%= nometech %></p>
+
+            <div id="nomes-populares-container">
+                <label for="nomePopular">Nome Popular da Doença</label>
+                <input type="text" id="nomePopular" name="nomePopular[]" placeholder="Nome Popular da Doença">
+            </div>
+            <button type="button" onclick="adicionarCampo()">Adicionar mais um nome</button>
+            <button type="button" onclick="removerUltimoCampo()">Remover último nome</button>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>

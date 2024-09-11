@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Realizado com Sucesso</title>
+    <script>
+        // Função para redirecionar após um determinado tempo (em milissegundos)
+        function redirecionar() {
+            setTimeout(() => {
+                const cid = "<%= cid %>";
+                const nomeTecnico = "<%= nomeTecnico %>";
+                window.location.href = `/cadsintoma?cid=${encodeURIComponent(cid)}&nomeTecnico=${encodeURIComponent(nomeTecnico)}`;
+            }, 3000);  // Tempo em milissegundos (3000 ms = 3 segundos)
+        }
+    </script>
+</head>
+<body onload="redirecionar()">
+    <div class="container">
+        <h1>Doença cadastrada com sucesso!</h1>
+        <p>ID da doença: <%= cid %></p>
+        <p>Você será redirecionado para a página de cadastro de sintomas.</p>
+    </div>
+</body>
+</html>

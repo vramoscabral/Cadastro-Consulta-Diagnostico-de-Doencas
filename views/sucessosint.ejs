@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Realizado com Sucesso</title>
+    <script>
+        // Função para redirecionar após um determinado tempo (em milissegundos)
+        function redirecionar() {
+            setTimeout(() => {
+                const pcid = "<%= pcid %>";
+                const nometech= "<%= nometech %>";
+                window.location.href = `/cadnomepopular?pcid=${encodeURIComponent(pcid)}&nometech=${encodeURIComponent(nometech)}`;
+            }, 3000);  // Tempo em milissegundos (3000 ms = 3 segundos)
+        }
+    </script>
+</head>
+<body onload="redirecionar()">
+    <div class="container">
+        <h1>Sintomas da Doença cadastrados com sucesso!</h1>
+        <p>ID da doença: <%= pcid %></p>
+        <p>Nome da doença: <%= nometech %></p>
+        <p>Você será redirecionado para a página de Nomes Populares (cadastro opcional).</p>
+    </div>
+</body>
+</html>

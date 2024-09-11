@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erro</title>
+    <script>
+        // Redireciona para o menu principal após 5 segundos
+        setTimeout(() => {
+            window.location.href = '/'; // Redireciona para a página inicial ou menu principal
+        }, 10000); // Tempo em milissegundos
+    </script>
+</head>
+<body>
+    <h1>Ocorreu um erro!</h1>
+    <p><%= mensagem %></p> <!-- Exibe a mensagem de erro -->
+    <p>Você será redirecionado para o menu principal em breve...</p>
+</body>
+</html>

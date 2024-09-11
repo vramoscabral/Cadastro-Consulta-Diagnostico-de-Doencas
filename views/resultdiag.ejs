@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostico Resultado</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container-table">
+        <a href="/" class="voltar">← Voltar</a>
+        <h1>Diagnóstico</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Doenca</th>
+                <th>Pontuação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% doencas.forEach((disease) => { %>
+                <tr>
+                    <td><%= disease.id %></td>
+                    <td><%= disease.nome %></td>
+                    <td><%= disease.pontuacao %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <% if (currentPage > 1) { %>
+            <a href="/resultdiag?page=<%= currentPage - 1 %>&sintomas=<%= sintomas.join(',') %>">Anterior</a>
+        <% } %>
+    
+        <% for (let i = 1; i <= totalPages; i++) { %>
+            <a href="/resultdiag?page=<%= i %>&sintomas=<%= sintomas.join(',') %>" 
+               class="<%= i == currentPage ? 'active' : '' %>">
+               <%= i %>
+            </a>
+        <% } %>
+    
+        <% if (currentPage < totalPages) { %>
+            <a href="/resultdiag?page=<%= currentPage + 1 %>&sintomas=<%= sintomas.join(',') %>">Próxima</a>
+        <% } %>
+    </div>    
+    </div>
+</body>
+</html>

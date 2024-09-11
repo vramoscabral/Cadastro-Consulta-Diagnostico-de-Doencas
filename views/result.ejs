@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container-table">
+        <a href="/" class="voltar">← Voltar</a>
+    <% if (processo === 0) { %>
+        <h1>Doença não encontrada.</h1>
+    <% } %>
+
+    <% if (processo === 1) { %>
+        <h1>Doença encontrada</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Patógeno</th>
+                <th>Doença</th>
+                <th>Sintomas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% result.forEach((disease) => { %>
+                <tr>
+                    <td><%= disease.id %></td>
+                    <td><%= disease.patogeno %></td>
+                    <td><%= disease.doença %></td>
+                    <td><%= disease.sintomas %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% } %>
+    <% if (processo === 2) { %>
+        <h1>Doença encontrada</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome Popular</th>
+                <th>ID</th>
+                <th>Patógeno</th>
+                <th>Doença</th>
+                <th>Sintomas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% result.forEach((disease) => { %>
+                <tr>
+                    <td><%= disease.nome_pop %></td>
+                    <td><%= disease.id %></td>
+                    <td><%= disease.patogeno %></td>
+                    <td><%= disease.doença %></td>
+                    <td><%= disease.sintomas %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% } %>
+    </div>
+</body>
+</html>
